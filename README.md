@@ -1,30 +1,21 @@
 # Server link
 https://student-managment-sytem-2.onrender.com
-# 🎓 Student Management System
 
-A modern web-based Student Management System developed using Flask, SQLite, HTML and CSS.
+https://student-managment-sytem-2.onrender.com/students
 
-This application allows users to:
+# Student Management System
 
-- Add student records
-- Update student information
-- Delete student data
-- Store records securely using SQLite database
-- Manage academic information through a professional user interface
-
-# How It Works
-
-Users enter student details through the form interface.
-The Flask backend processes the submitted data and stores it inside the SQLite database ("students.db").
-All records can be managed dynamically through the application.
+A professional student management platform developed using Flask and SQLite with a modern responsive interface.
 
 # Features
 
-- Responsive cinematic UI design
-- Smooth animations and modern layout
+- Add student records
+- Edit student details
+- Delete students safely with Trash system
+- Restore deleted records
+- Permanent delete option
+- Responsive cinematic UI
 - SQLite database integration
-- Flask backend support
-- Professional student administration panel
 - Fast and lightweight performance
 
 # Technologies Used
@@ -35,8 +26,11 @@ All records can be managed dynamically through the application.
 - HTML5
 - CSS3
 
+⚡ How It Works
 
+Users can add and manage student records through the web interface.
+All data is securely stored in the SQLite database and dynamically displayed inside the application.
 
 🌐 Deployment
 
-This project is deployed using Render and connected with GitHub for automatic updates and deployment.
+This project is deployed on Render and connected with GitHub for automatic deployment updates.
