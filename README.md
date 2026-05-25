@@ -1,8 +1,6 @@
 # Server link
 https://student-managment-sytem-2.onrender.com
 
-https://student-managment-sytem-2.onrender.com/students
-
 # Student Management System
 
 A professional student management platform developed using Flask and SQLite with a modern responsive interface.
