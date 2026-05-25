@@ -1,7 +1,3 @@
-# My site live at
-
-https://fardinmallick.github.io/student-managment-sytem-/
-
 # 🎓 Student Management System
 
 The Student Management System is a modern web-based application designed to manage student records efficiently through a professional and user-friendly interface.
