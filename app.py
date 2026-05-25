@@ -1,15 +1,10 @@
 from flask import Flask, render_template, request, redirect
 import sqlite3
 
-# =========================================
-# FLASK APP
-# =========================================
-
 app = Flask(__name__)
 
-# =========================================
+
 # SQLITE DATABASE CONNECTION
-# =========================================
 
 conn = sqlite3.connect(
     "students.db",
@@ -18,9 +13,8 @@ conn = sqlite3.connect(
 
 cursor = conn.cursor()
 
-# =========================================
 # CREATE TABLE
-# =========================================
+
 
 cursor.execute("""
 
@@ -46,9 +40,8 @@ CREATE TABLE IF NOT EXISTS students (
 
 conn.commit()
 
-# =========================================
 # HOME PAGE
-# =========================================
+
 
 @app.route('/')
 def home():
@@ -64,9 +57,7 @@ def home():
         students=students
     )
 
-# =========================================
 # ADD STUDENT
-# =========================================
 
 @app.route('/add', methods=['POST'])
 def add_student():
@@ -139,9 +130,7 @@ def add_student():
 
     return redirect('/')
 
-# =========================================
 # DELETE STUDENT
-# =========================================
 
 @app.route('/delete/<int:id>')
 def delete_student(id):
@@ -155,9 +144,7 @@ def delete_student(id):
 
     return redirect('/')
 
-# =========================================
 # EDIT PAGE
-# =========================================
 
 @app.route('/edit/<int:id>')
 def edit_student(id):
@@ -174,9 +161,7 @@ def edit_student(id):
         student=student
     )
 
-# =========================================
 # UPDATE STUDENT
-# =========================================
 
 @app.route('/update/<int:id>', methods=['POST'])
 def update_student(id):
@@ -238,18 +223,14 @@ def update_student(id):
 
     return redirect('/')
 
-# =========================================
 # TEST ROUTE
-# =========================================
 
 @app.route('/test')
 def test():
 
     return "Student Management System Working Successfully 🔥"
 
-# =========================================
 # RUN SERVER
-# =========================================
 
 if __name__ == '__main__':
 
