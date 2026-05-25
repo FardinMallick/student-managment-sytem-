@@ -3,8 +3,9 @@ import sqlite3
 
 app = Flask(__name__)
 
-
+# =========================================
 # SQLITE DATABASE CONNECTION
+# =========================================
 
 conn = sqlite3.connect(
     "students.db",
@@ -13,8 +14,9 @@ conn = sqlite3.connect(
 
 cursor = conn.cursor()
 
+# =========================================
 # CREATE TABLE
-
+# =========================================
 
 cursor.execute("""
 
@@ -40,24 +42,36 @@ CREATE TABLE IF NOT EXISTS students (
 
 conn.commit()
 
+# =========================================
 # HOME PAGE
-
+# =========================================
 
 @app.route('/')
 def home():
+
+    return render_template('index.html')
+
+# =========================================
+# SHOW ALL STUDENTS
+# =========================================
+
+@app.route('/students')
+def students():
 
     cursor.execute(
         "SELECT * FROM students ORDER BY id DESC"
     )
 
-    students = cursor.fetchall()
+    all_students = cursor.fetchall()
 
     return render_template(
-        'index.html',
-        students=students
+        'students.html',
+        students=all_students
     )
 
+# =========================================
 # ADD STUDENT
+# =========================================
 
 @app.route('/add', methods=['POST'])
 def add_student():
@@ -128,9 +142,11 @@ def add_student():
 
     conn.commit()
 
-    return redirect('/')
+    return redirect('/students')
 
+# =========================================
 # DELETE STUDENT
+# =========================================
 
 @app.route('/delete/<int:id>')
 def delete_student(id):
@@ -142,9 +158,11 @@ def delete_student(id):
 
     conn.commit()
 
-    return redirect('/')
+    return redirect('/students')
 
+# =========================================
 # EDIT PAGE
+# =========================================
 
 @app.route('/edit/<int:id>')
 def edit_student(id):
@@ -161,7 +179,9 @@ def edit_student(id):
         student=student
     )
 
+# =========================================
 # UPDATE STUDENT
+# =========================================
 
 @app.route('/update/<int:id>', methods=['POST'])
 def update_student(id):
@@ -221,16 +241,20 @@ def update_student(id):
 
     conn.commit()
 
-    return redirect('/')
+    return redirect('/students')
 
+# =========================================
 # TEST ROUTE
+# =========================================
 
 @app.route('/test')
 def test():
 
     return "Student Management System Working Successfully 🔥"
 
+# =========================================
 # RUN SERVER
+# =========================================
 
 if __name__ == '__main__':
 
