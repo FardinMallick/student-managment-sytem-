@@ -15,7 +15,7 @@ conn = sqlite3.connect(
 cursor = conn.cursor()
 
 # =========================================
-# CREATE TABLE
+# CREATE MAIN TABLE
 # =========================================
 
 cursor.execute("""
@@ -23,6 +23,32 @@ cursor.execute("""
 CREATE TABLE IF NOT EXISTS students (
 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    full_name TEXT,
+    email TEXT,
+    phone TEXT,
+    gender TEXT,
+    age TEXT,
+    course TEXT,
+    city TEXT,
+    student_state TEXT,
+    recommendation TEXT,
+    fees TEXT,
+    status TEXT
+
+)
+
+""")
+
+# =========================================
+# CREATE TRASH TABLE
+# =========================================
+
+cursor.execute("""
+
+CREATE TABLE IF NOT EXISTS trash_students (
+
+    id INTEGER PRIMARY KEY,
 
     full_name TEXT,
     email TEXT,
@@ -145,20 +171,144 @@ def add_student():
     return redirect('/students')
 
 # =========================================
-# DELETE STUDENT
+# DELETE STUDENT -> MOVE TO TRASH
 # =========================================
 
 @app.route('/delete/<int:id>')
 def delete_student(id):
 
     cursor.execute(
-        "DELETE FROM students WHERE id=?",
+        "SELECT * FROM students WHERE id=?",
         (id,)
     )
 
-    conn.commit()
+    student = cursor.fetchone()
+
+    if student:
+
+        cursor.execute("""
+
+        INSERT INTO trash_students
+        (
+            id,
+            full_name,
+            email,
+            phone,
+            gender,
+            age,
+            course,
+            city,
+            student_state,
+            recommendation,
+            fees,
+            status
+        )
+
+        VALUES
+        (
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?
+        )
+
+        """, student)
+
+        cursor.execute(
+            "DELETE FROM students WHERE id=?",
+            (id,)
+        )
+
+        conn.commit()
 
     return redirect('/students')
+
+# =========================================
+# TRASH PAGE
+# =========================================
+
+@app.route('/trash')
+def trash():
+
+    cursor.execute(
+        "SELECT * FROM trash_students ORDER BY id DESC"
+    )
+
+    deleted_students = cursor.fetchall()
+
+    return render_template(
+        'trash.html',
+        students=deleted_students
+    )
+
+# =========================================
+# RESTORE STUDENT
+# =========================================
+
+@app.route('/restore/<int:id>')
+def restore_student(id):
+
+    cursor.execute(
+        "SELECT * FROM trash_students WHERE id=?",
+        (id,)
+    )
+
+    student = cursor.fetchone()
+
+    if student:
+
+        cursor.execute("""
+
+        INSERT INTO students
+        (
+            id,
+            full_name,
+            email,
+            phone,
+            gender,
+            age,
+            course,
+            city,
+            student_state,
+            recommendation,
+            fees,
+            status
+        )
+
+        VALUES
+        (
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?
+        )
+
+        """, student)
+
+        cursor.execute(
+            "DELETE FROM trash_students WHERE id=?",
+            (id,)
+        )
+
+        conn.commit()
+
+    return redirect('/trash')
 
 # =========================================
 # EDIT PAGE

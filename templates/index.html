@@ -188,6 +188,21 @@
 
                 </h2>
 
+                <!-- TRASH BUTTON -->
+
+                <a
+                    href="/trash"
+                    class="delete-btn"
+                    style="
+                        display:inline-block;
+                        margin-bottom:20px;
+                    "
+                >
+
+                    Open Trash
+
+                </a>
+
                 <div class="table-container">
 
                     <table>
@@ -229,13 +244,16 @@
                                 <td>{{ student[6] }}</td>
                                 <td>{{ student[7] }}</td>
                                 <td>{{ student[8] }}</td>
+                                <td>{{ student[9] }}</td>
                                 <td>{{ student[10] }}</td>
                                 <td>{{ student[11] }}</td>
-                                <td>{{ student[9] }}</td>
 
                                 <td>
 
-                                    <a href="/edit/{{ student[0] }}" class="edit-btn">
+                                    <a
+                                        href="/edit/{{ student[0] }}"
+                                        class="edit-btn"
+                                    >
 
                                         Edit
 
@@ -244,7 +262,7 @@
                                     <a
                                         href="/delete/{{ student[0] }}"
                                         class="delete-btn"
-                                        onclick="return confirm('Delete this student?')"
+                                        onclick="return confirm('Move this student to trash?')"
                                     >
 
                                         Delete
