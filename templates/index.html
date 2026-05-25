@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Management System</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- LEFT PANEL -->
+
+        <div class="left-panel">
+
+            <div class="circle circle1"></div>
+            <div class="circle circle2"></div>
+
+            <div class="left-content">
+
+                <h1>STUDENT</h1>
+
+                <h2>MANAGEMENT</h2>
+
+                <span>SYSTEM</span>
+
+                <p>
+                    Intelligent student management platform built for modern academic environments with professional workflow, secure records and seamless performance.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT PANEL -->
+
+        <div class="right-panel">
+
+            <div class="form-title">
+
+                <h2>Add Student</h2>
+
+                <p>
+                    Professional Student Administration Interface
+                </p>
+
+            </div>
+
+            <form action="/add" method="POST">
+
+                <!-- FULL NAME -->
+
+                <div class="input-box">
+
+                    <input
+                        type="text"
+                        name="full_name"
+                        required
+                    >
+
+                    <label>Full Name</label>
+
+                </div>
+
+                <!-- EMAIL -->
+
+                <div class="input-box">
+
+                    <input
+                        type="email"
+                        name="email"
+                        required
+                    >
+
+                    <label>Email Address</label>
+
+                </div>
+
+                <!-- PHONE -->
+
+                <div class="input-box">
+
+                    <input
+                        type="text"
+                        name="phone"
+                        required
+                    >
+
+                    <label>Phone Number</label>
+
+                </div>
+
+                <!-- GENDER -->
+
+                <div class="input-box">
+
+                    <select name="gender" required>
+
+                        <option value="">Select Gender</option>
+
+                        <option value="Male">Male</option>
+
+                        <option value="Female">Female</option>
+
+                        <option value="Other">Other</option>
+
+                    </select>
+
+                </div>
+
+                <!-- AGE -->
+
+                <div class="input-box">
+
+                    <input
+                        type="number"
+                        name="age"
+                        required
+                    >
+
+                    <label>Age</label>
+
+                </div>
+
+                <!-- COURSE -->
+
+                <div class="input-box">
+
+                    <input
+                        type="text"
+                        name="course"
+                        required
+                    >
+
+                    <label>Course</label>
+
+                </div>
+
+                <!-- CITY -->
+
+                <div class="input-box">
+
+                    <input
+                        type="text"
+                        id="city"
+                        name="city"
+                        required
+                    >
+
+                    <label>City</label>
+
+                </div>
+
+                <!-- STATE -->
+
+                <div class="input-box">
+
+                    <input
+                        type="text"
+                        id="state"
+                        name="student_state"
+                        required
+                    >
+
+                    <label>State</label>
+
+                </div>
+
+                <!-- FEES -->
+
+                <div class="input-box">
+
+                    <input
+                        type="number"
+                        step="0.01"
+                        name="fees"
+                        required
+                    >
+
+                    <label>Fees</label>
+
+                </div>
+
+                <!-- STATUS -->
+
+                <div class="input-box">
+
+                    <select name="status" required>
+
+                        <option value="">Select Status</option>
+
+                        <option value="Active">Active</option>
+
+                        <option value="Pending">Pending</option>
+
+                        <option value="Completed">Completed</option>
+
+                    </select>
+
+                </div>
+
+                <!-- RECOMMENDATION -->
+
+                <div class="input-box full-width">
+
+                    <input
+                        type="text"
+                        name="recommendation"
+                    >
+
+                    <label>Recommendation</label>
+
+                </div>
+
+                <!-- BUTTON -->
+
+                <button type="submit">
+
+                    ADD STUDENT
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- GOOGLE MAPS AUTOCOMPLETE -->
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+
+    <script>
+
+        function initAutocomplete() {
+
+            // CITY AUTOCOMPLETE
+
+            const cityInput = document.getElementById("city");
+
+            const cityAutocomplete =
+                new google.maps.places.Autocomplete(
+                    cityInput,
+                    {
+                        types: ['(cities)']
+                    }
+                );
+
+            // STATE AUTOCOMPLETE
+
+            const stateInput = document.getElementById("state");
+
+            const stateAutocomplete =
+                new google.maps.places.Autocomplete(
+                    stateInput,
+                    {
+                        types: ['(regions)']
+                    }
+                );
+        }
+
+        window.onload = initAutocomplete;
+
+    </script>
+
+</body>
+
+</html>
