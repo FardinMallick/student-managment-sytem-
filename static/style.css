@@ -366,11 +366,180 @@ button:hover{
     0 0 14px rgba(0,217,255,0.22);
 }
 
+/* ===== STUDENTS TABLE ===== */
+
+.students-table{
+
+    margin-top:40px;
+
+    width:100%;
+}
+
+/* TABLE TITLE */
+
+.table-title{
+
+    color:white;
+
+    margin-bottom:18px;
+
+    font-size:28px;
+}
+
+/* TABLE CONTAINER */
+
+.table-container{
+
+    width:100%;
+
+    overflow-x:auto;
+
+    border-radius:18px;
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    background:#0f172a;
+}
+
+/* TABLE */
+
+table{
+
+    width:100%;
+
+    min-width:1400px;
+
+    border-collapse:collapse;
+}
+
+/* HEADER */
+
+th{
+
+    background:
+    linear-gradient(
+        135deg,
+        #00d9ff,
+        #0077ff
+    );
+
+    color:white;
+
+    padding:18px;
+
+    text-align:left;
+
+    font-size:14px;
+
+    white-space:nowrap;
+}
+
+/* TABLE DATA */
+
+td{
+
+    padding:16px;
+
+    color:white;
+
+    border-bottom:
+    1px solid rgba(255,255,255,0.05);
+
+    white-space:nowrap;
+
+    font-size:14px;
+}
+
+/* ROW COLORS */
+
+tr:nth-child(even){
+
+    background:#111827;
+}
+
+tr:nth-child(odd){
+
+    background:#1e293b;
+}
+
+/* HOVER */
+
+tr:hover{
+
+    background:#243244;
+}
+
+/* EDIT BUTTON */
+
+.edit-btn{
+
+    text-decoration:none;
+
+    padding:9px 16px;
+
+    border-radius:10px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #22c55e,
+        #16a34a
+    );
+
+    color:white;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    margin-right:8px;
+
+    transition:.2s ease;
+}
+
+.edit-btn:hover{
+
+    transform:translateY(-1px);
+}
+
+/* DELETE BUTTON */
+
+.delete-btn{
+
+    text-decoration:none;
+
+    padding:9px 16px;
+
+    border-radius:10px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ef4444,
+        #dc2626
+    );
+
+    color:white;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    transition:.2s ease;
+}
+
+.delete-btn:hover{
+
+    transform:translateY(-1px);
+}
+
 /* SCROLLBAR */
 
 ::-webkit-scrollbar{
 
     width:6px;
+    height:6px;
 }
 
 ::-webkit-scrollbar-thumb{
@@ -383,6 +552,11 @@ button:hover{
 /* RESPONSIVE */
 
 @media(max-width:1000px){
+
+    body{
+
+        overflow:auto;
+    }
 
     .container{
 
@@ -420,5 +594,10 @@ button:hover{
     .left-content h2{
 
         font-size:40px;
+    }
+
+    table{
+
+        min-width:1200px;
     }
 }

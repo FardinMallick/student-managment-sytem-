@@ -64,52 +64,29 @@
 
             <form action="/add" method="POST">
 
-                <!-- FULL NAME -->
-
                 <div class="input-box">
 
-                    <input
-                        type="text"
-                        name="full_name"
-                        placeholder=" "
-                        required
-                    >
+                    <input type="text" name="full_name" placeholder=" " required>
 
                     <label>Full Name</label>
 
                 </div>
 
-                <!-- EMAIL -->
-
                 <div class="input-box">
 
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder=" "
-                        required
-                    >
+                    <input type="email" name="email" placeholder=" " required>
 
                     <label>Email Address</label>
 
                 </div>
 
-                <!-- PHONE -->
-
                 <div class="input-box">
 
-                    <input
-                        type="text"
-                        name="phone"
-                        placeholder=" "
-                        required
-                    >
+                    <input type="text" name="phone" placeholder=" " required>
 
                     <label>Phone Number</label>
 
                 </div>
-
-                <!-- GENDER -->
 
                 <div class="input-box">
 
@@ -127,87 +104,45 @@
 
                 </div>
 
-                <!-- AGE -->
-
                 <div class="input-box">
 
-                    <input
-                        type="number"
-                        name="age"
-                        placeholder=" "
-                        required
-                    >
+                    <input type="number" name="age" placeholder=" " required>
 
                     <label>Age</label>
 
                 </div>
 
-                <!-- COURSE -->
-
                 <div class="input-box">
 
-                    <input
-                        type="text"
-                        name="course"
-                        placeholder=" "
-                        required
-                    >
+                    <input type="text" name="course" placeholder=" " required>
 
                     <label>Course</label>
 
                 </div>
 
-                <!-- CITY -->
-
                 <div class="input-box">
 
-                    <input
-                        type="text"
-                        id="city"
-                        name="city"
-                        placeholder=" "
-                        autocomplete="address-level2"
-                        required
-                    >
+                    <input type="text" name="city" placeholder=" " required>
 
                     <label>City</label>
 
                 </div>
 
-                <!-- STATE -->
-
                 <div class="input-box">
 
-                    <input
-                        type="text"
-                        id="state"
-                        name="student_state"
-                        placeholder=" "
-                        autocomplete="address-level1"
-                        required
-                    >
+                    <input type="text" name="student_state" placeholder=" " required>
 
                     <label>State</label>
 
                 </div>
 
-                <!-- FEES -->
-
                 <div class="input-box">
 
-                    <input
-                        type="number"
-                        step="0.01"
-                        name="fees"
-                        placeholder=" "
-                        required
-                    >
+                    <input type="number" step="0.01" name="fees" placeholder=" " required>
 
                     <label>Fees</label>
 
                 </div>
-
-                <!-- STATUS -->
 
                 <div class="input-box">
 
@@ -225,21 +160,13 @@
 
                 </div>
 
-                <!-- RECOMMENDATION -->
-
                 <div class="input-box full-width">
 
-                    <input
-                        type="text"
-                        name="recommendation"
-                        placeholder=" "
-                    >
+                    <input type="text" name="recommendation" placeholder=" ">
 
                     <label>Recommendation</label>
 
                 </div>
-
-                <!-- BUTTON -->
 
                 <button type="submit">
 
@@ -249,7 +176,7 @@
 
             </form>
 
-            <!-- STUDENTS DATA TABLE -->
+            <!-- STUDENTS TABLE -->
 
             {% if students %}
 
@@ -261,68 +188,80 @@
 
                 </h2>
 
-                <table>
+                <div class="table-container">
 
-                    <thead>
+                    <table>
 
-                        <tr>
+                        <thead>
 
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>City</th>
-                            <th>State</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <tr>
 
-                        </tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Gender</th>
+                                <th>Age</th>
+                                <th>Course</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Fees</th>
+                                <th>Status</th>
+                                <th>Recommendation</th>
+                                <th>Actions</th>
 
-                    </thead>
+                            </tr>
 
-                    <tbody>
+                        </thead>
 
-                        {% for student in students %}
+                        <tbody>
 
-                        <tr>
+                            {% for student in students %}
 
-                            <td>{{ student[0] }}</td>
+                            <tr>
 
-                            <td>{{ student[1] }}</td>
+                                <td>{{ student[0] }}</td>
+                                <td>{{ student[1] }}</td>
+                                <td>{{ student[2] }}</td>
+                                <td>{{ student[3] }}</td>
+                                <td>{{ student[4] }}</td>
+                                <td>{{ student[5] }}</td>
+                                <td>{{ student[6] }}</td>
+                                <td>{{ student[7] }}</td>
+                                <td>{{ student[8] }}</td>
+                                <td>{{ student[10] }}</td>
+                                <td>{{ student[11] }}</td>
+                                <td>{{ student[9] }}</td>
 
-                            <td>{{ student[2] }}</td>
+                                <td>
 
-                            <td>{{ student[7] }}</td>
+                                    <a href="/edit/{{ student[0] }}" class="edit-btn">
 
-                            <td>{{ student[8] }}</td>
+                                        Edit
 
-                            <td>{{ student[10] }}</td>
+                                    </a>
 
-                            <td>
+                                    <a
+                                        href="/delete/{{ student[0] }}"
+                                        class="delete-btn"
+                                        onclick="return confirm('Delete this student?')"
+                                    >
 
-                                <a
-                                    href="/edit/{{ student[0] }}"
-                                    class="edit-btn"
-                                >
-                                    Edit
-                                </a>
+                                        Delete
 
-                                <a
-                                    href="/delete/{{ student[0] }}"
-                                    class="delete-btn"
-                                    onclick="return confirm('Delete this student?')"
-                                >
-                                    Delete
-                                </a>
+                                    </a>
 
-                            </td>
+                                </td>
 
-                        </tr>
+                            </tr>
 
-                        {% endfor %}
+                            {% endfor %}
 
-                    </tbody>
+                        </tbody>
 
-                </table>
+                    </table>
+
+                </div>
 
             </div>
 

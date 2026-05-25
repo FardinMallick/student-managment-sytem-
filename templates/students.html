@@ -36,9 +36,20 @@
             color:#06b6d4;
         }
 
+        .table-container{
+
+            width:100%;
+
+            overflow-x:auto;
+
+            border-radius:15px;
+        }
+
         table{
 
             width:100%;
+
+            min-width:1400px;
 
             border-collapse:collapse;
 
@@ -54,6 +65,8 @@
             padding:15px;
 
             text-align:left;
+
+            color:#0f172a;
         }
 
         td{
@@ -74,6 +87,38 @@
             background:#334155;
         }
 
+        .edit-btn{
+
+            text-decoration:none;
+
+            background:#22c55e;
+
+            color:white;
+
+            padding:8px 14px;
+
+            border-radius:8px;
+
+            margin-right:8px;
+
+            font-size:14px;
+        }
+
+        .delete-btn{
+
+            text-decoration:none;
+
+            background:#ef4444;
+
+            color:white;
+
+            padding:8px 14px;
+
+            border-radius:8px;
+
+            font-size:14px;
+        }
+
     </style>
 
 </head>
@@ -82,37 +127,71 @@
 
     <h1>Students Database</h1>
 
-    <table>
+    <div class="table-container">
 
-        <tr>
+        <table>
 
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Status</th>
+            <tr>
 
-        </tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Course</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Fees</th>
+                <th>Status</th>
+                <th>Recommendation</th>
+                <th>Actions</th>
 
-        {% for student in students %}
+            </tr>
 
-        <tr>
+            {% for student in students %}
 
-            <td>{{ student[0] }}</td>
-            <td>{{ student[1] }}</td>
-            <td>{{ student[2] }}</td>
-            <td>{{ student[3] }}</td>
-            <td>{{ student[7] }}</td>
-            <td>{{ student[8] }}</td>
-            <td>{{ student[10] }}</td>
+            <tr>
 
-        </tr>
+                <td>{{ student[0] }}</td>
+                <td>{{ student[1] }}</td>
+                <td>{{ student[2] }}</td>
+                <td>{{ student[3] }}</td>
+                <td>{{ student[4] }}</td>
+                <td>{{ student[5] }}</td>
+                <td>{{ student[6] }}</td>
+                <td>{{ student[7] }}</td>
+                <td>{{ student[8] }}</td>
+                <td>{{ student[9] }}</td>
+                <td>{{ student[10] }}</td>
+                <td>{{ student[11] }}</td>
 
-        {% endfor %}
+                <td>
 
-    </table>
+                    <a
+                        href="/edit/{{ student[0] }}"
+                        class="edit-btn"
+                    >
+                        Edit
+                    </a>
+
+                    <a
+                        href="/delete/{{ student[0] }}"
+                        class="delete-btn"
+                        onclick="return confirm('Delete this student?')"
+                    >
+                        Delete
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
 
 </body>
 
