@@ -1,14 +1,5 @@
 from flask import Flask, render_template, request, redirect
-import mysql.connector
-
-from dotenv import load_dotenv
-import os
-
-# =========================================
-# LOAD ENVIRONMENT VARIABLES
-# =========================================
-
-load_dotenv()
+import sqlite3
 
 # =========================================
 # FLASK APP
@@ -17,22 +8,43 @@ load_dotenv()
 app = Flask(__name__)
 
 # =========================================
-# MYSQL DATABASE CONNECTION
+# SQLITE DATABASE CONNECTION
 # =========================================
 
-db = mysql.connector.connect(
+conn = sqlite3.connect(
+    "students.db",
+    check_same_thread=False
+)
 
-    host=os.getenv("DB_HOST"),
+cursor = conn.cursor()
 
-    user=os.getenv("DB_USER"),
+# =========================================
+# CREATE TABLE
+# =========================================
 
-    password=os.getenv("DB_PASSWORD"),
+cursor.execute("""
 
-    database=os.getenv("DB_NAME")
+CREATE TABLE IF NOT EXISTS students (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    full_name TEXT,
+    email TEXT,
+    phone TEXT,
+    gender TEXT,
+    age TEXT,
+    course TEXT,
+    city TEXT,
+    student_state TEXT,
+    recommendation TEXT,
+    fees TEXT,
+    status TEXT
 
 )
 
-cursor = db.cursor()
+""")
+
+conn.commit()
 
 # =========================================
 # HOME PAGE
@@ -42,25 +54,14 @@ cursor = db.cursor()
 def home():
 
     cursor.execute(
-
-        """
-
-        SELECT * FROM students
-
-        ORDER BY id DESC
-
-        """
-
+        "SELECT * FROM students ORDER BY id DESC"
     )
 
     students = cursor.fetchall()
 
     return render_template(
-
         'index.html',
-
         students=students
-
     )
 
 # =========================================
@@ -71,33 +72,21 @@ def home():
 def add_student():
 
     full_name = request.form['full_name']
-
     email = request.form['email']
-
     phone = request.form['phone']
-
     gender = request.form['gender']
-
     age = request.form['age']
-
     course = request.form['course']
-
     city = request.form['city']
-
     student_state = request.form['student_state']
-
-    fees = request.form['fees']
-
-    status = request.form['status']
-
     recommendation = request.form['recommendation']
+    fees = request.form['fees']
+    status = request.form['status']
 
     query = """
 
     INSERT INTO students
-
     (
-
         full_name,
         email,
         phone,
@@ -106,28 +95,24 @@ def add_student():
         course,
         city,
         student_state,
+        recommendation,
         fees,
-        status,
-        recommendation
-
+        status
     )
 
     VALUES
-
     (
-
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s,
-        %s
-
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?
     )
 
     """
@@ -142,15 +127,15 @@ def add_student():
         course,
         city,
         student_state,
+        recommendation,
         fees,
-        status,
-        recommendation
+        status
 
     )
 
     cursor.execute(query, values)
 
-    db.commit()
+    conn.commit()
 
     return redirect('/')
 
@@ -162,20 +147,11 @@ def add_student():
 def delete_student(id):
 
     cursor.execute(
-
-        """
-
-        DELETE FROM students
-
-        WHERE id=%s
-
-        """,
-
+        "DELETE FROM students WHERE id=?",
         (id,)
-
     )
 
-    db.commit()
+    conn.commit()
 
     return redirect('/')
 
@@ -187,27 +163,15 @@ def delete_student(id):
 def edit_student(id):
 
     cursor.execute(
-
-        """
-
-        SELECT * FROM students
-
-        WHERE id=%s
-
-        """,
-
+        "SELECT * FROM students WHERE id=?",
         (id,)
-
     )
 
     student = cursor.fetchone()
 
     return render_template(
-
         'edit.html',
-
         student=student
-
     )
 
 # =========================================
@@ -218,26 +182,16 @@ def edit_student(id):
 def update_student(id):
 
     full_name = request.form['full_name']
-
     email = request.form['email']
-
     phone = request.form['phone']
-
     gender = request.form['gender']
-
     age = request.form['age']
-
     course = request.form['course']
-
     city = request.form['city']
-
     student_state = request.form['student_state']
-
-    fees = request.form['fees']
-
-    status = request.form['status']
-
     recommendation = request.form['recommendation']
+    fees = request.form['fees']
+    status = request.form['status']
 
     query = """
 
@@ -245,19 +199,19 @@ def update_student(id):
 
     SET
 
-        full_name=%s,
-        email=%s,
-        phone=%s,
-        gender=%s,
-        age=%s,
-        course=%s,
-        city=%s,
-        student_state=%s,
-        fees=%s,
-        status=%s,
-        recommendation=%s
+        full_name=?,
+        email=?,
+        phone=?,
+        gender=?,
+        age=?,
+        course=?,
+        city=?,
+        student_state=?,
+        recommendation=?,
+        fees=?,
+        status=?
 
-    WHERE id=%s
+    WHERE id=?
 
     """
 
@@ -271,16 +225,16 @@ def update_student(id):
         course,
         city,
         student_state,
+        recommendation,
         fees,
         status,
-        recommendation,
         id
 
     )
 
     cursor.execute(query, values)
 
-    db.commit()
+    conn.commit()
 
     return redirect('/')
 
@@ -291,20 +245,16 @@ def update_student(id):
 @app.route('/test')
 def test():
 
-    return "Flask Working Successfully 🔥"
+    return "Student Management System Working Successfully 🔥"
 
 # =========================================
-# RUN FLASK SERVER
+# RUN SERVER
 # =========================================
 
 if __name__ == '__main__':
 
     app.run(
-
         host="0.0.0.0",
-
         port=5000,
-
         debug=True
-
     )

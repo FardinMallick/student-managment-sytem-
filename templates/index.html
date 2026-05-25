@@ -39,7 +39,7 @@
                 <span>SYSTEM</span>
 
                 <p>
-                    Intelligent student management platform built for modern academic environments with professional workflow, secure records and seamless performance.
+                    Intelligent student management platform built for modern academic environments with secure workflow, smooth performance and professional administration.
                 </p>
 
             </div>
@@ -69,6 +69,7 @@
                     <input
                         type="text"
                         name="full_name"
+                        placeholder=" "
                         required
                     >
 
@@ -83,6 +84,7 @@
                     <input
                         type="email"
                         name="email"
+                        placeholder=" "
                         required
                     >
 
@@ -97,6 +99,7 @@
                     <input
                         type="text"
                         name="phone"
+                        placeholder=" "
                         required
                     >
 
@@ -129,6 +132,7 @@
                     <input
                         type="number"
                         name="age"
+                        placeholder=" "
                         required
                     >
 
@@ -143,6 +147,7 @@
                     <input
                         type="text"
                         name="course"
+                        placeholder=" "
                         required
                     >
 
@@ -158,6 +163,8 @@
                         type="text"
                         id="city"
                         name="city"
+                        placeholder=" "
+                        autocomplete="address-level2"
                         required
                     >
 
@@ -173,6 +180,8 @@
                         type="text"
                         id="state"
                         name="student_state"
+                        placeholder=" "
+                        autocomplete="address-level1"
                         required
                     >
 
@@ -188,6 +197,7 @@
                         type="number"
                         step="0.01"
                         name="fees"
+                        placeholder=" "
                         required
                     >
 
@@ -220,6 +230,7 @@
                     <input
                         type="text"
                         name="recommendation"
+                        placeholder=" "
                     >
 
                     <label>Recommendation</label>
@@ -239,43 +250,6 @@
         </div>
 
     </div>
-
-    <!-- GOOGLE MAPS AUTOCOMPLETE -->
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
-
-    <script>
-
-        function initAutocomplete() {
-
-            // CITY AUTOCOMPLETE
-
-            const cityInput = document.getElementById("city");
-
-            const cityAutocomplete =
-                new google.maps.places.Autocomplete(
-                    cityInput,
-                    {
-                        types: ['(cities)']
-                    }
-                );
-
-            // STATE AUTOCOMPLETE
-
-            const stateInput = document.getElementById("state");
-
-            const stateAutocomplete =
-                new google.maps.places.Autocomplete(
-                    stateInput,
-                    {
-                        types: ['(regions)']
-                    }
-                );
-        }
-
-        window.onload = initAutocomplete;
-
-    </script>
 
 </body>
 
